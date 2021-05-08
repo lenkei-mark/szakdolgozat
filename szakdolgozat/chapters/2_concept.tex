@@ -6,13 +6,14 @@ Az online szállásfoglaló oldalak megjelenésével egyszerűsődött a turist�
 
 A hátulütője a dolognak a szállásadó részéről, hogy foglalást akármilyen fizetési kötelezettség nélkül véghez vihet a vendég, ugyanez igaz a lemondásra is. Van lehetősége a szállás tulajdonosának, csak úgy engedélyezni az online foglalást, hogy a foglalónak kötelező bankkártyát megadni, és a foglalás összegének egy bizonyos részét le is vonhatja. Azonban ebben az esetben lehetséges, hogy a vendégek más hotelt fognak keresni az online felületen, ahol nem kell ilyen adatokat megadni ezáltal potenciális ügyfelektől fosztja meg magát a szálloda.
 
-Egy tanulmány szerint ami a \ref{fig:lemondasi}\cite{online_lemondas} ábrán látható az online foglalások 40\% lemondásra kerül. 2014-ben az átlagos lemondási arány 32.9\% volt. 2018-ban azonban már elérte a 39.6\%-ot\cite{online_lemondas}.
+Egy tanulmány szerint, ami a \ref{fig:lemondasi}. ábrán látható az online foglalások 40\% lemondásra kerül \cite{online_lemondas}. 2014-ben az átlagos lemondási arány 32.9\% volt. 2018-ban azonban már elérte a 39.6\%-ot \cite{online_lemondas}.
 
 \begin{figure}[h]
+    \includegraphics[width=\textwidth]{images/2.fejezet/Online_foglalas_lemondas_szazalek.png}
     \caption{Lemondási arányok évekre lebontva}
-    \includegraphics[scale=0.45]{images/2.fejezet/Online_foglalas_lemondas_szazalek.png}
     \label{fig:lemondasi}
-\end{figure}  
+\end{figure} 
+
 Ezek az online közvetítő oldalak arra ösztönzik a turistákat, hogy minél többet és többet foglaljanak, hiszen ha le szeretnék mondani a foglalást azt minden következmény nélkül megtehetik. Ez több gonddal is jár a szállásadónak \cite{online_lemondas}.
 \begin{itemize}
     \item Bevételt veszítenek ha a lemondott foglalás után nem tudják eladni a szobát.
@@ -50,13 +51,13 @@ A Python úgynevezett interpreteres nyelv, ami azt jelenti, hogy nincs különv�
 \subsection{Jupyter Notebook}
 Az egész egy projekt, aminek a célja egy nyílt forráskódú, nyílt szabványok és szolgáltatások fejlesztése interaktív fejlesztési feladatokra több programozási nyelv elérhetőségének biztosításával.
 
-Ebből fejlődött ki a Jupyter Notebook, ami egy webalapú interaktív fejlesztési környezet amivel, Jupyter Notebook dokumentumokat lehet létrehozni. Valójában ez a dokumentum egy JSON formátumban lévő fájl, ami egy rendezett listát tartalmaz az input és output cellákról. Ezek a cellák tartalmazhatnak kódot, szöveget Markdown segítségével, matematikai számításokat, különböző ábrázolásokat és média fájlokat. A munkafüzet kiterjesztése általában ".ipynb" \cite{project_jupyter}.
+Ebből fejlődött ki a Jupyter Notebook, ami egy webalapú interaktív fejlesztési környezet amivel, Jupyter Notebook dokumentumokat lehet létrehozni. Valójában ez a dokumentum egy JSON formátumban lévő fájl, ami egy rendezett listát tartalmaz az input és output cellákról. Ezek a cellák tartalmazhatnak kódot, szöveget Markdown segítségével, matematikai számításokat, különböző ábrázolásokat és média fájlokat. A munkafüzet kiterjesztése általában ".ipynb" \cite{project_jupyter}. Az alkalmazásról egy kép \aref{fig:jupyter}. ábrán látható.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{images/2.fejezet/jupyter_notebook.png}
     \caption{Jupyter notebook kinézete}
-    \label{fig:my_label}
+    \label{fig:jupyter}
 \end{figure}
 
 \subsection{Numpy}
@@ -94,14 +95,14 @@ Mivel rengeteg helyen és helyzetben lehet használni, ezért most csak néhány
 \begin{itemize}
     \item Feltáró elemzés: A gépi tanulással azonosítható mind a strukturált, mind a strukturálatlan adatokban rejlő minta vagy szerkezet, így könnyebben látható, mit is mutatnak az adatok.
     \item Ügyfelek viselkedésének előrejelzése: A gépi tanulással ügyfélhez kapcsolódó adatok bányászhatók, amelyekkel könnyebben azonosíthatók minták és viselkedésmódok, ami optimalizált termékjavaslatokat és a lehető legjobb vásárlói élményt eredményezheti. Ez az a része a gépi tanulásnak amit a szakdolgozatomba megfogunk vizsgálni, hogy egy adott ügyfél lemondja-e vagy sem a szállást.
-    \item A felhasználói élmény fejlesztése: Adaptív interfészek, célzott tartalom, csevegőrobotok, hangvezérelt virtuális asszisztensek – ezek mind példák arra, hogy a gépi tanulás hogyan segíthet optimalizálni az ügyfélélményt\cite{machinelearningbasics}.
+    \item A felhasználói élmény fejlesztése: Adaptív interfészek, célzott tartalom, csevegőrobotok, hangvezérelt virtuális asszisztensek – ezek mind példák arra, hogy a gépi tanulás hogyan segíthet optimalizálni az ügyfélélményt \cite{machinelearningbasics}.
 \end{itemize}
 
 \subsection{A gépi tanulás lehetséges technikáinak egy tipikus besorolása az alábbi.}
 \begin{itemize}
     \item Felügyelt tanulás: Címkékkel vagy struktúrával ellátott adatkészletek esetén az adatok „betanítják” a gépet, így az hatékonyabban végezhet előrejelzéseket és hozhat döntéseket \cite{machinelearningbasics}. Például megadhatunk egy adatkészletet, amely az elmúlt 100 évre vonatkozóan városok népességi adatait tartalmazza, és azt szeretnénk tudni, hogy egy adott város népessége hogyan alakul majd négy év múlva. Az eredmény olyan címkéket használ, amelyek már szerepelnek az adatkészletben: népesség, város és év \cite{machinelearningalgorithms}.
     \item Felügyelet nélküli tanulás: Adatok klaszterekbe való csoportosításával könnyebben foglalkozhat címkék vagy struktúra nélküli adatokkal, valamint azonosíthat mintákat és kapcsolatokat \cite{machinelearningbasics}. Például megadjuk az ügyféladatokat, és olyan ügyfélcsoportokat szeretnénk eredményül kapni, akik hasonló termékeket kedvelnek. Az általunk megadott adatok nincsenek megcímkézve, és az eredményben szereplő címkék az adatpontok között felderített hasonlóságok alapján jönnek létre \cite{machinelearningalgorithms}.
-    \item Megerősítő tanulás: A megerősítéses tanulás nem támaszkodik a címkézett adatkészletekre, itt a modellnek nem mondjuk meg, hogy mely műveleteket kell végrehajtania, vagy épp a feladat optimális végrehajtásának módját. A megerősítéses tanulásnál jutalmakat és büntetéseket használunk az egyes döntésekhez kapcsolódó címkék helyett annak jelzésére, hogy a megtett művelet jó vagy rossz \cite{reinforcementlearning}. Tegyük fel például, hogy önvezető autót tervezünk, és biztosítani szeretnénk, hogy az autó betartja a szabályokat, és az emberek biztonságáról is gondoskodik. Amint az autó tapasztalatokat szerez és már vannak megerősítő előzményei, megtanulja, hogyan maradhat a saját sávjában, hogyan tarthatja tiszteletben a sebességkorlátozást, és hogy fékezzen ha gyalogost lát\cite{machinelearningalgorithms}.
+    \item Megerősítő tanulás: A megerősítéses tanulás nem támaszkodik a címkézett adatkészletekre, itt a modellnek nem mondjuk meg, hogy mely műveleteket kell végrehajtania, vagy épp a feladat optimális végrehajtásának módját. A megerősítéses tanulásnál jutalmakat és büntetéseket használunk az egyes döntésekhez kapcsolódó címkék helyett annak jelzésére, hogy a megtett művelet jó vagy rossz \cite{reinforcementlearning}. Tegyük fel például, hogy önvezető autót tervezünk, és biztosítani szeretnénk, hogy az autó betartja a szabályokat, és az emberek biztonságáról is gondoskodik. Amint az autó tapasztalatokat szerez és már vannak megerősítő előzményei, megtanulja, hogyan maradhat a saját sávjában, hogyan tarthatja tiszteletben a sebességkorlátozást, és hogy fékezzen ha gyalogost lát \cite{machinelearningalgorithms}.
 \end{itemize}
 
 \subsection{A megoldandó feladatokat szintén kategorizálni szokták.}
@@ -143,10 +144,10 @@ A szállodák a bevételkezelésnél is használhatnak gépi tanulást. A száll
 \begin{figure}[hbt!]
     \centering
     \caption{Különböző gépi tanulási feladatok a szállodaiparban}
-    \includegraphics[scale=0.53]{images/2.fejezet/Gepi_tanulas_szallodaipar.PNG}
+    \includegraphics[width=\textwidth]{images/2.fejezet/Gepi_tanulas_szallodaipar.PNG}
     \label{fig:gepitanulasszallodaiparban}
 \end{figure}
 
-A \ref{fig:gepitanulasszallodaiparban} táblázatban azt láthatjuk, hogy a szállodaipar milyen különféle részeit melyik országban vizsgálják és fejlesztik gépi tanulás segítségével. Láthatjuk, hogy az előbbi néhány példánál, mint a foglalás előrejelzés, visszajelzések elemzése vagy a vendégek viselkedésének meghatározásánál nem áll meg a dolog. Olyan problémák megoldására is használják, mint egy leendő hotel helyének meghatározása üzleti sikersség szempontjából vagy az energiafogyasztás megbecsülésére, milyen foglalásokat fogadjanak el vagy utasítsanak vissza.
+A \ref{fig:gepitanulasszallodaiparban}. táblázatban azt láthatjuk, hogy a szállodaipar milyen különféle részeit melyik országban vizsgálják és fejlesztik gépi tanulás segítségével. Láthatjuk, hogy az előbbi néhány példánál, mint a foglalás előrejelzés, visszajelzések elemzése vagy a vendégek viselkedésének meghatározásánál nem áll meg a dolog. Olyan problémák megoldására is használják, mint egy leendő hotel helyének meghatározása üzleti sikersség szempontjából vagy az energiafogyasztás megbecsülésére, milyen foglalásokat fogadjanak el vagy utasítsanak vissza.
 
 Azonban azt láthatjuk, hogy a legnagyobb érdeklődést kiváltó fejlesztések a bevételkezeléssel vannak összefüggésben. Ezért is választottam szakdolgozatom témájának egy olyan modell építését, ami minél nagyobb pontossággal meg tudja határozni, hogy melyik foglalások lesznek lemondva \cite{gepi_tanulas_szallodaipar}.

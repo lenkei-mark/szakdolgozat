@@ -54,7 +54,11 @@ print(classification_report(y_test, y_dtree_pred))
 print(confusion_matrix(y_test, y_dtree_pred))
 \end{python}
 
-\textbf{Osztályozási jelentés:}
+\medskip
+
+\noindent \textbf{Osztályozási jelentés:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|l|l|}
             \hline
@@ -72,7 +76,11 @@ weighted avg & 0.85      & 0.85   & 0.85     & 29848   \\
             \hline
 \end{tabular}
 
-\textbf{Zavartsági mátrix:}
+\medskip
+
+\noindent \textbf{Zavartsági mátrix:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|}
 \hline
@@ -83,6 +91,8 @@ Tippelt 0 & 16649     & 2139      \\
 Tippelt 1 & 2218      & 8842   \\
 \hline
 \end{tabular}
+
+\bigskip
 
 Látható, hogy a modell pontossága 85\%. A 0-os osztállyal rendelkező foglalások 89\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 80\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 2218 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 2139-re tippelte azt hogy 0-as osztályú miközben 1-es volt
 
@@ -95,7 +105,11 @@ print(classification_report(y_test, y_rforest_pred))
 print(confusion_matrix(y_test, y_rforest_pred))
 \end{python}
 
-\textbf{Osztályozási jelentés:}
+\medskip
+
+\noindent \textbf{Osztályozási jelentés:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -113,7 +127,11 @@ weighted avg & 0.88      & 0.88   & 0.88     & 29848  \\
 \hline
 \end{tabular}
 
-\textbf{Zavartsági mátrix:}
+\medskip
+
+\noindent \textbf{Zavartsági mátrix:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|}
 \hline
@@ -124,6 +142,8 @@ Tippelt 0 & 17664     & 1144      \\
 Tippelt 1 & 2332      & 8728   \\
 \hline
 \end{tabular}
+
+\bigskip
 
 Látható, hogy a modell pontossága 88\%. A 0-os osztállyal rendelkező foglalások 94\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 79\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 2332 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 1144-re tippelte azt hogy 0-as osztályú miközben 1-es volt
 
@@ -136,7 +156,11 @@ print(classification_report(y_test, y_logisticreg_pred))
 print(confusion_matrix(y_test, y_logisticreg_pred))
 \end{python}
 
-\textbf{Osztályozási jelentés:}
+\medskip
+
+\noindent \textbf{Osztályozási jelentés:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -154,7 +178,11 @@ weighted avg & 0.80      & 0.80   & 0.80     & 29848  \\
 \hline
 \end{tabular}
 
-\textbf{Zavartsági mátrix:}
+\medskip
+
+\noindent \textbf{Zavartsági mátrix:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|}
 \hline
@@ -165,6 +193,8 @@ Tippelt 0 & 16589     & 2199      \\
 Tippelt 1 & 3745      & 7315   \\
 \hline
 \end{tabular}
+
+\bigskip
 
 Látható, hogy a modell pontossága 80\%. A 0-os osztállyal rendelkező foglalások 88\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 66\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 3745 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 2199-re tippelte azt hogy 0-as osztályú miközben 1-es volt
 
@@ -177,7 +207,11 @@ print(classification_report(y_test, y_neigh_pred))
 print(confusion_matrix(y_test, y_neigh_pred))
 \end{python}
 
-\textbf{Osztályozási jelentés:}
+\medskip
+
+\noindent \textbf{Osztályozási jelentés:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -195,7 +229,11 @@ weighted avg & 0.77      & 0.77   & 0.77     & 29848  \\
 \hline
 \end{tabular}
 
-\textbf{Zavartsági mátrix:}
+\medskip
+
+\noindent \textbf{Zavartsági mátrix:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|}
 \hline
@@ -207,9 +245,12 @@ Tippelt 1 & 4061      & 6999   \\
 \hline
 \end{tabular}
 
+\bigskip
+
 Látható, hogy a modell pontossága 77\%. A 0-os osztállyal rendelkező foglalások 85\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 63\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 4061 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 2764-re tippelte azt hogy 0-as osztályú miközben 1-es volt
 
 \subsubsection{Gradient Boosting Classifier}
+
 \begin{python}
 gdclf = GradientBoostingClassifier()
 gdclf.fit(X_train, y_train)
@@ -218,7 +259,11 @@ print(classification_report(y_test, y_gdclf_pred))
 print(confusion_matrix(y_test, y_gdclf_pred))
 \end{python}
 
-\textbf{Osztályozási jelentés:}
+\medskip
+
+\noindent \textbf{Osztályozási jelentés:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -236,7 +281,11 @@ weighted avg & 0.84      & 0.84   & 0.84     & 29848  \\
 \hline
 \end{tabular}
 
-\textbf{Zavartsági mátrix:}
+\medskip
+
+\noindent \textbf{Zavartsági mátrix:}
+
+\medskip
 
 \begin{tabular}{|l|l|l|}
 \hline
@@ -247,6 +296,8 @@ Tippelt 0 & 16958     & 1830     \\
 Tippelt 1 & 2908      & 8152    \\
 \hline
 \end{tabular}
+
+\bigskip
 
 Látható, hogy a modell pontossága 84\%. A 0-os osztállyal rendelkező foglalások 90\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 74\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 2908 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 1830-re tippelte azt hogy 0-as osztályú miközben 1-es volt
 

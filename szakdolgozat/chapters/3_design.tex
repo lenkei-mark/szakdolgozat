@@ -11,7 +11,8 @@ Mielőtt eljutunk egy kész modellig rengeteg minden történik. Először is ez
 \end{enumerate}
 
 \Section{Adathalmaz bemutatása}
-Mivel adathalmaz egy online kutatásból elérhető amit Nuno Antonio, Ana Almeida és Luis Nunes csinált 2019 februárjában, ezért a folyamat első lépésén túl is vagyunk. Az adathalmazt kaggle.com-ról töltöttem le. Szállodafoglalási adatokat tartalmaz, egy városi szállodáról és egy üdülőszállóról. Mindkét szálloda esetében 32 különböző változó található, amiből 31 jelleg változó, 1 pedig a kimeneti változó, összesen közel 120.000 mintával.\cite{adathalmaz}
+
+Mivel adathalmaz egy online kutatásból elérhető amit Nuno Antonio, Ana Almeida és Luis Nunes csinált 2019 februárjában, ezért a folyamat első lépésén túl is vagyunk. Az adathalmazt kaggle.com-ról töltöttem le. Szállodafoglalási adatokat tartalmaz, egy városi szállodáról és egy üdülőszállóról. Mindkét szálloda esetében 32 különböző változó található, amiből 31 jelleg változó, 1 pedig a kimeneti változó, összesen közel 120.000 mintával \cite{adathalmaz}.
 
 A változók a következőek:
 \begin{itemize}
@@ -128,7 +129,7 @@ Ebből is rengeteg féle és fajta van. Szakdolgozatomban a következő öttel f
 \end{itemize}
 
 \subsection{Decision Tree Classifier (Döntési fa)}
-A döntési fa a különböző döntési lehetőségeket ábrázolja, az esetleges következményeket, esélyeket, hasznosságot és erőforrásokat figyelembe véve, attól függően, hogy mire használják. A döntési fa egy olyan faszerkezet, amelyben minden belső csúcs egy értékre vonatkozó ellenőrzést jelöl, a csúcsból kivezető minden él pedig az ellenőrzés egy-egy kimenetének feleltethető meg, így lehetővé téve, hogy fa formában ábrázoljunk függvényeket. Könnyen érthető, magyarázható; inkább értékek, mint függvények szerepelnek benne. Az induktív tanulási módszerek közé tartozik, és mindig csak egy eredményt ad magyarázattal, akkor is, ha több legjobb megoldás lenne. Érzékeny a tanulóhalmaz hibáira, és a további tanuláshoz újabb döntési fát kell generálni. Kombinálható más módszerekkel, így javítani lehet a hibáin. Egy lehetséges döntési fa látható a \ref{fig:dontesifa} ábrán.
+A döntési fa a különböző döntési lehetőségeket ábrázolja, az esetleges következményeket, esélyeket, hasznosságot és erőforrásokat figyelembe véve, attól függően, hogy mire használják. A döntési fa egy olyan faszerkezet, amelyben minden belső csúcs egy értékre vonatkozó ellenőrzést jelöl, a csúcsból kivezető minden él pedig az ellenőrzés egy-egy kimenetének feleltethető meg, így lehetővé téve, hogy fa formában ábrázoljunk függvényeket. Könnyen érthető, magyarázható; inkább értékek, mint függvények szerepelnek benne. Az induktív tanulási módszerek közé tartozik, és mindig csak egy eredményt ad magyarázattal, akkor is, ha több legjobb megoldás lenne. Érzékeny a tanulóhalmaz hibáira, és a további tanuláshoz újabb döntési fát kell generálni. Kombinálható más módszerekkel, így javítani lehet a hibáin. Egy lehetséges döntési fa látható a \ref{fig:dontesifa}. ábrán.
 
 A döntési fa előállítására több eljárást is kidolgoztak. Ezek mind rekurzív algoritmusok, amik egy kérdésre adott válasz szerint szétbontják a tanulóhalmazt. A kérdéseket úgy teszik fel, hogy a kisebb részek homogénebbek legyenek a magyarázandó változó szempontjából, mint az egész \cite{dontesi_fa_1}.
 
@@ -167,8 +168,8 @@ Több kritériumot is megadnak a rekurzió leállítására az egyes ágakon:
     \label{fig:dontesifa}
 \end{figure}
 
-
 \subsection{Random Forest Classifier (Véletlen erdő)}
+
 A Random Forest vagy magyarul véletlen erdő egy gépi tanulásban használt klasszifikációs és regressziós módszer, aminek a lényege, hogy több különböző döntési fát hoz létre, és ezek eredményeinek átlagolásával vagy klasszifikáció esetén a legtöbb szavazatot kapott eredmény kiválasztásával adja meg a végeredményt. Egy lehetséges véletlen erdő látható a \ref{fig:veletlenerdo} ábrán.
 
 Ahhoz, hogy a módszer jól működjön, az szükséges, hogy az egyes döntési fák a véletlennél jobban teljesítsenek, illetve hogy az előrejelzéseik, és így a hibáik egymástól viszonylag függetlenek legyenek, azaz kicsi legyen köztük a korreláció. A több döntési fa együttes alkalmazása így ki tudja szűrni az egyes döntési fák által vétett hibákat \cite{veletlen_erdo_1}.
@@ -198,7 +199,7 @@ Ahhoz, hogy a módszer jól működjön, az szükséges, hogy az egyes döntési
 
 
 \subsection{Logistic Regression (Logisztikus regresszió)}
-Egy algoritmus ami a lineáris regressziónak egy kiterjesztett változata osztályozásra. A lineáris regresszió által kapott értékeket átadja egy szigmoid függvénynek, ezáltal a kimeneti értékek 0 és 1 között lesznek.   Arra használják, hogy megadják egy esemény bekövetkezésének valószínűségét (Esetemben ez az esemény a szoba foglalás lemondása). Akkor célszerű használni ezt a módszert, amikor a kimenő adat kétértékű (pl.: 0/1, Igaz/Hamis, Igen/Nem) \cite{logisztikus_regresszio_2}. A \ref{fig:logisztikusregresszio} ábrán egy lehetséges logisztikus regresszió ábrázolása látható.
+Egy algoritmus ami a lineáris regressziónak egy kiterjesztett változata osztályozásra. A lineáris regresszió által kapott értékeket átadja egy szigmoid függvénynek, ezáltal a kimeneti értékek 0 és 1 között lesznek.   Arra használják, hogy megadják egy esemény bekövetkezésének valószínűségét (Esetemben ez az esemény a szoba foglalás lemondása). Akkor célszerű használni ezt a módszert, amikor a kimenő adat kétértékű (pl.: 0/1, Igaz/Hamis, Igen/Nem) \cite{logisztikus_regresszio_2}. A \ref{fig:logisztikusregresszio}. ábrán egy lehetséges logisztikus regresszió ábrázolása látható.
 
 \subsubsection{Logisztikus regresszió előnyei:}
 \begin{itemize}
@@ -223,7 +224,7 @@ Egy algoritmus ami a lineáris regressziónak egy kiterjesztett változata oszt�
 \end{figure}
 
 \subsection{K-nearest Neighbour Classifier (K-legközelebbi szomszédon alapuló osztályozás)}
-Ez az algoritmus azt feltételezi, hogy az azonos kimeneteknek a bemenetei adatai egy koordináta rendszerben ábrázolva közel helyezkednek el egymáshoz képest hiszen hasonlóak \cite{k_legkozelebbi_2}. Ez nem egy modellt épít, hanem eltárolja a tanulásra létrehozott adathalmazt. A kimeneti osztályt az alapján határozza meg, hogy az elmentett adathalmazon belül a szomszédságában milyen osztállyal rendelkező adatok vannak. A K azt határozza meg az algoritmusban, hogy az első hány legközelebbi szomszédját nézze az algoritmus ami alapján dönt \cite{k_legkozelebbi_1}. Példával szemléltetve látható a K-legközelebbi szomszédon alapuló algoritmus a \ref{fig:klegkozelebb} ábrán.
+Ez az algoritmus azt feltételezi, hogy az azonos kimeneteknek a bemenetei adatai egy koordináta rendszerben ábrázolva közel helyezkednek el egymáshoz képest hiszen hasonlóak \cite{k_legkozelebbi_2}. Ez nem egy modellt épít, hanem eltárolja a tanulásra létrehozott adathalmazt. A kimeneti osztályt az alapján határozza meg, hogy az elmentett adathalmazon belül a szomszédságában milyen osztállyal rendelkező adatok vannak. A K azt határozza meg az algoritmusban, hogy az első hány legközelebbi szomszédját nézze az algoritmus ami alapján dönt \cite{k_legkozelebbi_1}. Példával szemléltetve látható a K-legközelebbi szomszédon alapuló algoritmus a \ref{fig:klegkozelebbi}. ábrán.
 
 \subsubsection{K-legközelebbi szomszédon alapuló osztályozás előnyei}
 \begin{itemize}
@@ -248,7 +249,7 @@ Ez az algoritmus azt feltételezi, hogy az azonos kimeneteknek a bemenetei adata
 \end{figure}
 
 \subsection{Gradient Boosting Classifier}
-Hasonlít a véletlen erdő algoritmushoz, hiszen általában itt is döntési fák sokasága adja a kimeneti osztályt \cite{gradient_boosting_1}. A különbség a kettő között az, hogy míg a véletlen erdő az összes döntési fát egyszerre külön-külön tanítja az adathalmaz egy véletlenszerű mintájából, addig a Gradient Boosting egyszerre csak egy fát épít ami az előző hibáit próbálja orvosolni. Sok lefutás után lesz egyre több döntési fánk egy Gradient Boosting algoritmusban. A legtöbb esetben nem olyan mélyek a döntési fák, mint a véletlen erdő esetében \cite{gradient_boosting_2}. A \ref{fig:gradientboosting} ábrán a Gradient Boosting Classifier egy példája látható.
+Hasonlít a véletlen erdő algoritmushoz, hiszen általában itt is döntési fák sokasága adja a kimeneti osztályt \cite{gradient_boosting_1}. A különbség a kettő között az, hogy míg a véletlen erdő az összes döntési fát egyszerre külön-külön tanítja az adathalmaz egy véletlenszerű mintájából, addig a Gradient Boosting egyszerre csak egy fát épít ami az előző hibáit próbálja orvosolni. Sok lefutás után lesz egyre több döntési fánk egy Gradient Boosting algoritmusban. A legtöbb esetben nem olyan mélyek a döntési fák, mint a véletlen erdő esetében \cite{gradient_boosting_2}. A \ref{fig:gradientboosting}. ábrán a Gradient Boosting Classifier egy példája látható.
 
 \subsubsection{Gradient boosting előnyei}
 \begin{itemize}
@@ -267,7 +268,7 @@ Hasonlít a véletlen erdő algoritmushoz, hiszen általában itt is döntési f
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.22]{images/3.fejezet/GradientBoosting.png}
+    \includegraphics[scale=0.45]{images/3.fejezet/GradientBoosting.png}
     \caption{Gradient boosting tanulása szemléltetve \cite{gradient_abra}}
     \label{fig:gradientboosting}
 \end{figure}

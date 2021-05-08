@@ -7,11 +7,11 @@ Az előző fejezetben leírtam, hogy mi az a 4 lépés ami ahhoz kell, hogy egy 
 \begin{python}
 data.isnull().any()
 \end{python}
-\includegraphics[scale=0.7]{images/4.fejezet/1.adatelokeszites.PNG}
+\includegraphics[scale=0.8]{images/4.fejezet/{1.adatelokeszites}.PNG}
 
 Ez alapján látom a 4 változót, aminek oszlopaiban található üres érték. A 4 változó a következő: \texttt{children, country, agent, company}. Nézzük meg, hány százalékában található az oszlopokban.
 
-\includegraphics[scale=0.7]{images/4.fejezet/1.adatelokeszites1.PNG}
+\includegraphics[scale=0.8]{images/4.fejezet/{1.adatelokeszites1}.PNG}
 
 A \texttt{children} változónak 0.0034\%, a \texttt{country} változónak 0.4087\% , az \texttt{agent} változónak 13.68\%, a \texttt{company} változónak pedig 94.30\% értéke hiányzik.
 
@@ -27,18 +27,18 @@ Azonban ezek közül a megoldások nem lehet egyértelműen választani, hogy me
 Például, ha egy olyan adatkészletem van ami, házaknak az árát becsüli meg abból, hogy melyik szoba mekkora, hány szoba van, van-e garázs és hiányzik néhány sorban arról adat, hogy mekkora a nappali akkor rossz döntés az, hogy az egész oszlopot töröljük, hiszen ez esetben rengeteg értékes adatot szedünk ki amivel a jövőben a modellem pontossága csökkenhet. Egy ilyen esetben mivel általában minden háznak van nappalija elképzelhető, hogy az adatok elvesztek út közben, ezért célszerű lehet a hiányzó adatokat az oszlop átlagával/mediánjával/móduszával behelyettesíteni. Ha azonban az adatoknak kevesebb mint 1\%-nál nem található csak, hogy mekkora a nappali méret, feltételezhetjük, hogy ezeknek a házaknak valóban nincs nappalijuk, és a legcélszerűbb ilyenkor úgy hagyni ahogy vannak.
 
 \subsubsection{\texttt{children} oszlop vizsgálata}
-\includegraphics{images/4.fejezet/2.adattisztitas.PNG}
+\includegraphics{images/4.fejezet/{2.adattisztitas}.PNG}
 
 A gyerekek számának átlaga 0.1 és ha a gyerek számát növekvő sorrendbe rendezve is láthatom, hogy az első 75\%-ban 0 gyerekkel foglaltak szállást. Így a \texttt{children} oszlop hiányzó értékeit behelyettesíthetem 0-val, ugyanis elég valószínű, hogyha ez az adat hiányzik akkor a szállást foglalok nem vittek gyereket, valamint ha átlag, medián vagy módusz alapján helyetesítenék be ezt az értéket akkor is 0-val kellene.
 
 \subsubsection{\texttt{country} oszlop vizsgálata}
-\includegraphics{images/4.fejezet/2.adattisztitas1.PNG}
+\includegraphics{images/4.fejezet/{2.adattisztitas1}.PNG}
 
 Mint látható itt 177 különböző kategóriájú adat van. Azonban ennek a 72.86\%-át az első 5 leggyakrabban jelenlévő ország teszi ki. Így a hiányzó értékek mellett rengeteg olyan értékem is va, ami maximum egyszer-kétszer jelenik meg az adathalmazban. Ezek az értékek sokkal nem segítik a modell pontosságát, hiszen maximum egy-kettő olyan sort fognak látni, amit egy adott országból foglaltak. Így gondolhatnám azt is, hogy mivel a 177 különböző országból 5 teszi ki a foglalások nagy részét, hogy ezt az oszlopot csak simán el lehet hagyni, hiszen az országok többségéről nem fog sok mindent megtudni a modell abból a pár sorból amiben egy adott nemzet szerepel. Én viszont azt a lehetőséget választanám, hogy az első 5 országot úgy hagyom ahogy vannak, a többit és ahol hiányzó értékek vannak pedig egy "other" értékre cserélném, így a modellem nem fog olyan országot látni, ami csak pár sorban szerepel. A hiányzó értékeket azért lehet biztonságosan other-re cserélni, ugyanis egy adott vendégnek a világ valamelyik országából mindenféleképpen érkeznie kell.
 
 Az új country oszlop  így néz ki a csere után.
 
-\includegraphics{images/4.fejezet/2.adattisztitas2.PNG}
+\includegraphics{images/4.fejezet/{2.adattisztitas2}.PNG}
 
 \subsubsection{\texttt{agent} és \texttt{company} oszlopok vizsgálata}
 
@@ -54,11 +54,11 @@ Ez a két oszlop vélemény szerint közel áll egymáshoz, ezért lehet a két 
 \subsubsection{\texttt{adr} oszlop vizsgálata}
 Miközben nézegettem a különböző statisztikákat az adatokról, ennél a változónál észrevettem egy furcsa dolgot, ami a következő.
 
-\includegraphics{images/4.fejezet/2.adattisztitas3.PNG}
+\includegraphics{images/4.fejezet/{2.adattisztitas3}.PNG}
 
 A legkisebb érték -6.38 ami azt jelenti, hogy a szállás fizetett a vendégnek azért, hogy ott tartozkódjon. Azért nem igazán szokott előfordulni, úgyhogy megvizsgáltam hány 0-nál kisebb adr értékkel rendelkező sor található az adathalmazban és ezeket a sorokat kiírattam.
 
-\includegraphics[scale=0.55]{images/4.fejezet/2.adattisztitas4.PNG}
+\includegraphics[scale=0.8]{images/4.fejezet/{2.adattisztitas4}.PNG}
 
 Csupán egy érték van ami kisebb 0-nál. Semmi különöset nem veszek észre ebben a sor adatban. A foglalást nem mondták le, a reservation\_status: Check-out amit az ott tartózkodásuk végén módosítottak tehát nem mentek el hamarabb a szállodából akármilyen okból. Így úgy gondoltam, hogy ez az egy érték is rendben legyen behelyetesítettem ennél a sornál az adr-t az átlagos adr értékével.
 
@@ -84,9 +84,13 @@ Csináltam egy pivot táblát amiben a következő változókat raktam bele: \te
 
 Ebből azt láthatom, hogy a feltevése, miszerint minél hamarabb foglalják le a szállást az érkezés dátumához képest annál nagyobb valószínűséggel mondják le igaz, hiszen a lemondott foglalásoknak (1) majdnem kétszer nagyobb a lead\_time-ja, mint a nem lemondottaknak.
 
-Azonban meg szeretném nézni azt is, hogyan oszlik el külön-külön a lemondott és a nem lemondott foglalások lead\-time-ja. Erre a következő vonaldiagrammot hoztam létre.
+Azonban meg szeretném nézni azt is, hogyan oszlik el külön-külön a lemondott és a nem lemondott foglalások lead\-time-ja. Erre \aref{fig:orange_blue}. ábrán látható hisztogramot készítettem.
 
-\includegraphics[scale=0.57]{images/4.fejezet/3.adatelemzes1.PNG}
+\begin{figure}[h!]
+\includegraphics[width=\textwidth]{images/4.fejezet/{3.adatelemzes1}.PNG}
+\caption{A lemondott (narancssárga) és a nem lemondott (kék) foglalások eloszlása}
+\label{fig:orange_blue}
+\end{figure}
 
 Ebből azt látom, hogy a két diagram az elején, azaz a kis lead\_time-oknál különöl el a legjobban, minél nagyobb annál jobban egybeolvad. Ezek szerint a nem lemondott foglalások nagyrésze néhány nappal az érkezés dátuma előtt történt.
 
@@ -109,7 +113,7 @@ print("Csak hetkoznap: {: .2f} lemondva"
 print("Csak hetvege: {: .2f} lemondva"
 .format(1-(only_weekend_night_no_cancel/only_weekend_night)))
 \end{python}
-\includegraphics{images/4.fejezet/3.adatelemzes2.PNG}
+\includegraphics{images/4.fejezet/{3.adatelemzes2}.PNG}
 
 13\%-kal kevesebb foglalást mondanak le a hétvégéken. Valószínűleg azért, mert az embereknek a hétköznapokban munka vagy akármilyen más ügyei lehetnek, amik miatt le kell mondani a foglalást. Akár egyik napról a másikra is. Ez gondot jelent a szállodáknak, ugyanis minél később mondja le a foglalását egy vendég, annál kevesebb ideje van eladni újra a szobát.
 
@@ -134,7 +138,7 @@ for index, row in canceled_info_week_night.iterrows():
 print("A foglalasok{: .2f}van legfeljebb 2 nappal erkezes elott lemondva"
 .format(less_than_2_count/len(canceled_info_week_night)))
 \end{python}
-\includegraphics{images/4.fejezet/3.adatelemzes3.PNG}
+\includegraphics{images/4.fejezet/{3.adatelemzes3}.PNG}
 
 Csupán a foglalások 6\%-a van legfeljebb 2 nappal érkezés előtt lemondva.  Ezáltal az ezekben a szállodákban foglalt vendégeknek csupán töredékének kellett 1-2 nappal érkezés előtt lemondania a szállást. Így hibás volt a feltevés, hogy hétköznaponta sok foglalásokat gyakran mondják le 1-2 nappal érkezés előtt.
 
@@ -147,7 +151,7 @@ print("Atlagos felnottek szama az osszes foglalas figyelembe
 vetelenel:{:.4f}".format(data["adults"].mean()))
 \end{python}
 
-\includegraphics{images/4.fejezet/3.adatelemzes4.PNG}
+\includegraphics{images/4.fejezet/{3.adatelemzes4}.PNG}
 
 \begin{center}
 \begin{tabular}{ c c  }
@@ -162,7 +166,7 @@ A lemondott foglalásoknal a felnőttek számának átlaga minimálisan nagyobb 
 
 \subsection{Gyerekek hatása}
 \textit{Ha az emberek visznek magukkal gyereket nagyobb valószínűséggel mondják le a szállást.}
-\includegraphics{images/4.fejezet/3.adatelemzes6.PNG}
+\includegraphics{images/4.fejezet/{3.adatelemzes6}.PNG}
 
 A két eset között, hogy gyerekkel vagy gyerek nélkül mondják-e le nagyobb valószínűséggel a foglalást nincs nagy eltérés. Valamint a két különböző esetnek nagyban eltér a rendelkezésre álló adatmennyiség (egyik esetről 110800 példánk van a másikról csupán 8590), ezért az állítást, hogy akik gyerekkel foglaltak szállást nagyobb valószínűséggel mondják nem tudom magabiztosan igazolni.
 
@@ -171,7 +175,7 @@ A két eset között, hogy gyerekkel vagy gyerek nélkül mondják-e le nagyobb 
 
 Mivel a babák még a gyerekeknél is kényesebb eseteket jelentenek ezért merem azt feltételezni, hogy nagyobb lesz a két eset között az eltérés mint a gyerekek esetében.
 
-\includegraphics{images/4.fejezet/3.adatelemzes7.PNG}
+\includegraphics{images/4.fejezet/{3.adatelemzes7}.PNG}
 
 Ebben a két esetben már elégnek mondható lenne az eltérés, hogy következtetéseket vonjak le. Azonban a rendelkezésre álló adatok arányával nagyobb baj van mint az előző vizsgálatnál, hiszen itt azoknak a foglalásoknak a száma amiben babával utaznak még az 1000 darabot sem éri el míg a másik esetben 118000-nél is több példánk van. Emiatt a hatalmas aránytalanság miatt ebből sem tudok biztos dolgot állítani.
 
@@ -186,9 +190,13 @@ sns.heatmap(data.corr().abs(), annot=True)
 plt.show()
 \end{python}
 
-\includegraphics[scale=0.53]{images/4.fejezet/4.korrelacios.PNG}
+\begin{figure}[h!]
+\includegraphics[width=\textwidth]{images/4.fejezet/{4.korrelacios}.PNG}
+\caption{Keresztkorrelációs vizsgálat mátrixa}
+\label{fig:crossed}
+\end{figure}
 
-Ezt a korrelációs mátrixot a következő képpen kell értelmezni. A korrelációs együttható minél közelebb van 1-hez annál jobban befolyásolja a két változó egymást és minél közelebb 0-hoz annál kevésbé. 
+\Aref{fig:crossed}. ábrán látható korrelációs mátrixot a következőképpen kell értelmezni. A korrelációs együttható minél közelebb van 1-hez annál jobban befolyásolja a két változó egymást és minél közelebb 0-hoz annál kevésbé. 
 Ez alapján meg tudjuk állapítani, hogy az 5 legfontosabb numerikus változó:
 \begin{enumerate}
     \item \texttt{lead\_time}
@@ -209,7 +217,8 @@ cat_var=data[['is_canceled', 'hotel', 'meal', 'market_segment',
 \end{python}
 
 
-A \texttt{reservation\_status} változót mindenféleképpen el kell hagyni hiszen ebből a bemenetből a model rögtön meg is mondhatja a kimenetet hiszen ebben van eltárolva a foglalás állapota, hogy Check-Out (megérkezett a vendég és elhagyta a szállást) vagy Canceled (lemondta a foglalást) és ha ezt a változót töröljük akkor a \texttt{reservation\_status\_date} is szükségtelen, ami azt mutatja, hogy foglalás állapota mikor változott.
+A \texttt{reservation\_status} változót mindenféleképpen el kell hagyni hiszen ebből a bemenetből a model rögtön meg is mondhatja a kimenetet hiszen ebben van eltárolva a foglalás állapota, hogy Check-Out (megérkezett a vendég és elhagyta a szállást) vagy Canceled (lemondta a foglalást) és ha ezt a változót töröljük akkor a \\
+\texttt{reservation\_status\_date} is szükségtelen, ami azt mutatja, hogy foglalás állapota mikor változott.
 
 \subsubsection{Dummy változók}
 Mielőtt kitérek a kategorikus változók korrelációs mátrixára először is a dummy változókról kell írnom. Hiszen a korreláció egy matematikai fogalom amibe számokkal tud számolni. Emiatt szükség van a mi kategorikus változóink átalakítására egész szám változókká. Ennek többféle módja van.
@@ -244,7 +253,9 @@ cat_corr.corr().abs().sort_values(ascending=False,
 
 A kategorikus változók korrelációs mátrixa pedig így nézz ki a 10 legjelentősebb dummy változóval.
 
-\includegraphics{images/4.fejezet/4.korrelacios1.PNG}
+\begin{center}
+\includegraphics{images/4.fejezet/{4.korrelacios1}.PNG}
+\end{center}
 
 Ebből megállapítottam, hogy az 5 legfontosabb kategorikus változó a következő:
 \begin{enumerate}
@@ -256,9 +267,12 @@ Ebből megállapítottam, hogy az 5 legfontosabb kategorikus változó a követk
 \end{enumerate}
 
 Megvizsgálom ezeket a változókat.
-\subsubsection{\texttt{deposit\_type}}
-\includegraphics{images/4.fejezet/4.korrelacios2.PNG}
 
+\begin{center}
+\subsubsection{\texttt{deposit\_type}}
+\includegraphics{images/4.fejezet/{4.korrelacios2}.PNG}
+\end{center}
+	
 Mint láthatom a foglalások nagy többsége No Deposit-tal történt. Azonban ha jobban megvizsgálom az adatokat a Non Refund-nál észrevettem azt, hogy a lemondás átlaga nagyon magas 0.99 míg a másik két eset nem tér el nagyban egymástól. Ezt a változót jobban megvizsgálom ugyanis a kategorikus változóknál ez befolyásolja legjobban az \texttt{is\_canceled} változót így ha valami baj van vele az azt jelenti, hogy pontatalan lesz a modellem ha ezeket az adatokat is beleveszem.
 
 \begin{python}
@@ -274,24 +288,37 @@ Refundable & 0.000000 & 0.024691 & 0.592593 & 0.123457 & 0.141975
 \end{tabular}
 }
 
-A \texttt{previous\_cancellations}, a \texttt{is\_repeated\_guest}, a \texttt{booking\_changes}, a \texttt{required\_car\_parking\_spaces} és a \texttt{total\_of\_special\_requests} átlagjai nagyon eltérnek a Non Refund esetnél a másik kettőhöz képest. Ezek alapján az adatok alapján Non Refund-al olyan emberek foglaltak szállást akik az esetek majdnem felében mondtak már le foglalást, parkolóhelyre nincs szükségük, nagyon ritkán kérik hogy változtassanak valamit a foglalásban és kevés különleges kérésük van. Ezzel abban az esetben ha az \texttt{deposit\_type} (Előleg típusa) más lenne mint Non Refund (Nem visszatéríthető) nem lenne gond, viszont valószínűtlennek tartom, hogy az emberekek akik így foglalnak szállást hatalmas arányban mondják le, így hagyják veszni a pénzüket ezért inkább biztonságból kiveszem a \texttt{deposit\_type}-ot is a jelleg változók közül ugyanis ezek miatt lehetnek benne valótlan adatok.
+A \texttt{previous\_cancellations}, a \texttt{is\_repeated\_guest}, a \texttt{booking\_changes}, \\
+a \texttt{required\_car\_parking\_spaces} és a \texttt{total\_of\_special\_requests} átlagjai nagyon eltérnek a Non Refund esetnél a másik kettőhöz képest. Ezek alapján az adatok alapján Non Refund-al olyan emberek foglaltak szállást akik az esetek majdnem felében mondtak már le foglalást, parkolóhelyre nincs szükségük, nagyon ritkán kérik hogy változtassanak valamit a foglalásban és kevés különleges kérésük van. Ezzel abban az esetben ha az \texttt{deposit\_type} (Előleg típusa) más lenne mint Non Refund (Nem visszatéríthető) nem lenne gond, viszont valószínűtlennek tartom, hogy az emberekek akik így foglalnak szállást hatalmas arányban mondják le, így hagyják veszni a pénzüket ezért inkább biztonságból kiveszem a \texttt{deposit\_type}-ot is a jelleg változók közül ugyanis ezek miatt lehetnek benne valótlan adatok.
 
 \subsubsection{\texttt{market\_segment}}
-\includegraphics{images/4.fejezet/4.korrelacios3.png}
+
+\begin{center}
+\includegraphics{images/4.fejezet/{4.korrelacios3}.png}
+\end{center}
 
 Ennél a változónál nem találtam az elérhető adatoknál különösebb rendelleneséget.
 
 \subsubsection{\texttt{assigned\_room\_type}}
-\includegraphics{images/4.fejezet/4.korrelacios4.png}
+
+\begin{center}
+\includegraphics{images/4.fejezet/{4.korrelacios4}.png}
+\end{center}
 
 Ennél a változónál látható, hogy az L és P foglalt szobáknak 100\%-os a lemondási aránya, azoban L típusú szobából csupán 1 darabot foglaltak, P típusú szobából pedig 12 darabot. Ez töredéke az összes adatnak, így inkább benne hagyom ezt a változót mert úgy gondolom, hogy inkább javítani fog a modellem pontosságán mintsem rontani.
 
 \subsubsection{\texttt{agent}}
-\includegraphics{images/4.fejezet/4.korrelacios5.PNG}
+
+\begin{center}
+\includegraphics{images/4.fejezet/{4.korrelacios5}.PNG}
+\end{center}
 
 Ennél a változónál nem találtam az elérhető adatoknál különösebb rendelleneséget.
 
 \subsubsection{\texttt{distribution\_channel}}
-\includegraphics{images/4.fejezet/4.korrelacios6.PNG}
+
+\begin{center}
+\includegraphics{images/4.fejezet/{4.korrelacios6}.PNG}
+\end{center}
 
 Ennél a változónál nem találtam az elérhető adatoknál különösebb rendelleneséget.
