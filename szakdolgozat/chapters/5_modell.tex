@@ -1,0 +1,264 @@
+\Chapter{Modell építése és tanítása}
+
+Ebben a fejezetben fogom építeni, tanítani a modellt. Az előző fejezetben pontosabb képet kaptam, hogy mely változók a fontosabbak valamint, hogy melyiket kell kivenni belőle hiszen ronthatja a pontosságot. Ez alapján folytatom a munkát.
+
+\Section{Adatok előkészítése}
+
+\begin{python}
+num_features = ["lead_time","arrival_date_week_number",
+                "arrival_date_day_of_month",
+                "stays_in_weekend_nights",
+                "stays_in_week_nights","adults","children",
+                "babies","is_repeated_guest", "previous_cancellations",
+                "previous_bookings_not_canceled","agent","company",
+                "required_car_parking_spaces", 
+                "total_of_special_requests", "adr"]
+cat_features = ["hotel", "arrival_date_month", "meal", 
+                "country", "market_segment", 
+                "distribution_channel", "reserved_room_type", 
+                "assigned_room_type", "customer_type"]
+\end{python}
+
+Az adatokat kétfelé szedem numerikus és kategorikus jelleg változókra. Mivel már a vizsgálatunk elején foglalkoztam a null változókkal így a mostani adatok előkészítésnél ezt a lépést már nem kell megcsinálom. Amit meg kell még azonban az a kategorikus változók átalakítása dummy változókra. Ezután két változóba rakom az adatokat X-be és y-ba. Az X-be tartoznak a jelleg változok az y-ba pedig a kimenet, hogy az adott foglalást lemondták-e vagy sem.
+
+\begin{python}
+X = data.drop(["is_canceled"], axis=1)[num_features + cat_features]
+X = pd.get_dummies(X)
+y = data["is_canceled"]
+\end{python}
+
+Majd train és test részekre szétválogatom. Erre azért van szükség hogy mikor tesztelem a modell pontosságát, olyan adatokat lásson amit a tanítás során még nem látott. A teljes adat 25\%-át fogom tesztelési célra szánni.
+
+\begin{python}
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+    test_size=0.25, random_state=10)
+\end{python}
+
+\Section{Modell építés és tanítás}
+Itt fogom a 3. fejezetben bemutatott gépi tanulási algoritmusok modelljeit építeni és tanítani.
+
+Mielőtt belekezdenék fontos megérteni a classification\_report metódus kimenetét.
+\begin{itemize}
+    \item precision: Hány százalékát sikerült helyesen osztályozni.
+    \item recall: Hány százalékát találta meg a modell egy osztálynak az ugyanazon osztályon belül.
+    \item f1-score: Harmonikus közép a precision és recall értékek között.
+    \item support: Az adott osztály hányszor jelenik meg az adathalmazban.
+\end{itemize}
+
+\subsubsection{Decision Tree Classifier}
+\begin{python}
+dtree = DecisionTreeClassifier()
+dtree.fit(X_train, y_train)
+y_dtree_pred=dtree.predict(X_test)
+print(classification_report(y_test, y_dtree_pred))
+print(confusion_matrix(y_test, y_dtree_pred))
+\end{python}
+
+\textbf{Osztályozási jelentés:}
+
+\begin{tabular}{|l|l|l|l|l|}
+            \hline
+             & precision & recall & f1-score & support \\
+             \hline
+0            & 0.88      & 0.89   & 0.88     & 18788   \\
+            \hline
+1            & 0.81      & 0.80   & 0.80     & 11060   \\
+            \hline
+accuracy     &           &        & 0.85     & 29848   \\
+            \hline
+macro avg    & 0.84      & 0.84   & 0.84     & 29848   \\
+            \hline
+weighted avg & 0.85      & 0.85   & 0.85     & 29848   \\
+            \hline
+\end{tabular}
+
+\textbf{Zavartsági mátrix:}
+
+\begin{tabular}{|l|l|l|}
+\hline
+          & Valóban 0 & Valóban 1 \\
+\hline
+Tippelt 0 & 16649     & 2139      \\
+\hline
+Tippelt 1 & 2218      & 8842   \\
+\hline
+\end{tabular}
+
+Látható, hogy a modell pontossága 85\%. A 0-os osztállyal rendelkező foglalások 89\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 80\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 2218 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 2139-re tippelte azt hogy 0-as osztályú miközben 1-es volt
+
+\subsubsection{Random Forest Classifier}
+\begin{python}
+rforest = RandomForestClassifier()
+rforest.fit(X_train, y_train)
+y_rforest_pred=rforest.predict(X_test)
+print(classification_report(y_test, y_rforest_pred))
+print(confusion_matrix(y_test, y_rforest_pred))
+\end{python}
+
+\textbf{Osztályozási jelentés:}
+
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+             & precision & recall & f1-score & support \\
+\hline
+0            & 0.88      & 0.94   & 0.91     & 18788   \\
+\hline
+1            & 0.88      & 0.79   & 0.83     & 11060   \\
+\hline
+accuracy     &           &        & 0.88     & 29848   \\
+\hline
+macro avg    & 0.88      & 0.86   & 0.87     & 29848   \\
+\hline
+weighted avg & 0.88      & 0.88   & 0.88     & 29848  \\
+\hline
+\end{tabular}
+
+\textbf{Zavartsági mátrix:}
+
+\begin{tabular}{|l|l|l|}
+\hline
+          & Valóban 0 & Valóban 1 \\
+         \hline
+Tippelt 0 & 17664     & 1144      \\
+\hline
+Tippelt 1 & 2332      & 8728   \\
+\hline
+\end{tabular}
+
+Látható, hogy a modell pontossága 88\%. A 0-os osztállyal rendelkező foglalások 94\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 79\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 2332 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 1144-re tippelte azt hogy 0-as osztályú miközben 1-es volt
+
+\subsubsection{Logistic Regression}
+\begin{python}
+logisticreg = LogisticRegression()
+logisticreg.fit(X_train, y_train)
+y_logisticreg_pred=logisticreg.predict(X_test)
+print(classification_report(y_test, y_logisticreg_pred))
+print(confusion_matrix(y_test, y_logisticreg_pred))
+\end{python}
+
+\textbf{Osztályozási jelentés:}
+
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+             & precision & recall & f1-score & support \\
+             \hline
+0            & 0.82      & 0.88   & 0.85     & 18788   \\
+\hline
+1            & 0.77      & 0.66   & 0.71     & 11060   \\
+\hline
+accuracy     &           &        & 0.80     & 29848   \\
+\hline
+macro avg    & 0.79      & 0.77   & 0.78     & 29848   \\
+\hline
+weighted avg & 0.80      & 0.80   & 0.80     & 29848  \\
+\hline
+\end{tabular}
+
+\textbf{Zavartsági mátrix:}
+
+\begin{tabular}{|l|l|l|}
+\hline
+          & Valóban 0 & Valóban 1 \\
+          \hline
+Tippelt 0 & 16589     & 2199      \\
+\hline
+Tippelt 1 & 3745      & 7315   \\
+\hline
+\end{tabular}
+
+Látható, hogy a modell pontossága 80\%. A 0-os osztállyal rendelkező foglalások 88\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 66\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 3745 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 2199-re tippelte azt hogy 0-as osztályú miközben 1-es volt
+
+\subsubsection{K-nearest Neighbour Classifier}
+\begin{python}
+neigh = KNeighborsClassifier()
+neigh.fit(X_train, y_train)
+y_neigh_pred=neigh.predict(X_test)
+print(classification_report(y_test, y_neigh_pred))
+print(confusion_matrix(y_test, y_neigh_pred))
+\end{python}
+
+\textbf{Osztályozási jelentés:}
+
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+             & precision & recall & f1-score & support \\
+             \hline
+0            & 0.80      & 0.85   & 0.82     & 18788   \\
+\hline
+1            & 0.72      & 0.63   & 0.67     & 11060   \\
+\hline
+accuracy     &           &        & 0.77     & 29848   \\
+\hline
+macro avg    & 0.76      & 0.74   & 0.75     & 29848   \\
+\hline
+weighted avg & 0.77      & 0.77   & 0.77     & 29848  \\
+\hline
+\end{tabular}
+
+\textbf{Zavartsági mátrix:}
+
+\begin{tabular}{|l|l|l|}
+\hline
+          & Valóban 0 & Valóban 1 \\
+          \hline
+Tippelt 0 & 16024     & 2764      \\
+\hline
+Tippelt 1 & 4061      & 6999   \\
+\hline
+\end{tabular}
+
+Látható, hogy a modell pontossága 77\%. A 0-os osztállyal rendelkező foglalások 85\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 63\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 4061 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 2764-re tippelte azt hogy 0-as osztályú miközben 1-es volt
+
+\subsubsection{Gradient Boosting Classifier}
+\begin{python}
+gdclf = GradientBoostingClassifier()
+gdclf.fit(X_train, y_train)
+y_gdclf_pred=gdclf.predict(X_test)
+print(classification_report(y_test, y_gdclf_pred))
+print(confusion_matrix(y_test, y_gdclf_pred))
+\end{python}
+
+\textbf{Osztályozási jelentés:}
+
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+             & precision & recall & f1-score & support \\
+             \hline
+0            & 0.85      & 0.90   & 0.88     & 18788   \\
+\hline
+1            & 0.82      & 0.74   & 0.77     & 11060   \\
+\hline
+accuracy     &           &        & 0.84     & 29848   \\
+\hline
+macro avg    & 0.84      & 0.82   & 0.83     & 29848   \\
+\hline
+weighted avg & 0.84      & 0.84   & 0.84     & 29848  \\
+\hline
+\end{tabular}
+
+\textbf{Zavartsági mátrix:}
+
+\begin{tabular}{|l|l|l|}
+\hline
+          & Valóban 0 & Valóban 1 \\
+          \hline
+Tippelt 0 & 16958     & 1830     \\
+\hline
+Tippelt 1 & 2908      & 8152    \\
+\hline
+\end{tabular}
+
+Látható, hogy a modell pontossága 84\%. A 0-os osztállyal rendelkező foglalások 90\%-át megtalálta míg az 1-es osztállyal rendelkező osztályoknak csak a 74\%-át találta meg. A teszt halmazban 29848 adat állt rendelkezésre ebből 18788 volt 0-as osztállyal és 11060 volt 1-es osztállyal rendelkező. 2908 adatra tippelte azt a modell, hogy 1-es osztályú miközben 0-as volt és 1830-re tippelte azt hogy 0-as osztályú miközben 1-es volt
+
+\subsection{Összegzés}
+
+Látható, hogy az osztályozási jelentés alapján a pontosságot tekintve a következő sorrend állt fel a gépi tanulási algoritmusok között ehhez az adatkészlethez, a szakdolgozatomban látható előkészületek mellett.
+\begin{enumerate}
+    \item Random Forest Classifier
+    \item Decision Tree Classifier
+    \item Gradient Boosting Classifier
+    \item Logistic Regression
+    \item K-nearest Neighbour Classifier
+\end{enumerate}
+
+Mindegyik algoritmusnál megfigyelhető volt, hogy az 1-es osztállyal rendelkező foglalásokat nehezebben ismerik fel. A teszt halmazban körülbelül 7000-el több 0-as osztállyal rendelkező adat van. Az is megfigyelhető, hogy a döntési fa alapú algoritmusok jobban teljesítettek.
